@@ -1,0 +1,22 @@
+{
+    "OriginRequestPolicyConfig": {
+        "Name": "Trivia-API-Policy",
+        "Comment": "Policy to forward API key header",
+        "HeadersConfig": {
+            "HeaderBehavior": "whitelist",
+            "Headers": {
+                "Quantity": 2,
+                "Items": [
+                    "x-api-key",
+                    "Authorization"
+                ]
+            }
+        },
+        "CookiesConfig": {
+            "CookieBehavior": "none"
+        },
+        "QueryStringsConfig": {
+            "QueryStringBehavior": "all"
+        }
+    }
+}

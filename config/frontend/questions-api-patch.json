@@ -1,0 +1,17 @@
+[
+  {
+    "op": "replace",
+    "path": "/gatewayresponse/DEFAULT_4XX/responseParameters/gatewayresponse.header.Access-Control-Allow-Origin",
+    "value": "'https://trivia60.com,https://www.trivia60.com,http://localhost:3000'"
+  },
+  {
+    "op": "replace",
+    "path": "/gatewayresponse/DEFAULT_4XX/responseParameters/gatewayresponse.header.Access-Control-Allow-Headers",
+    "value": "'Content-Type,X-Api-Key,Accept'"
+  },
+  {
+    "op": "replace",
+    "path": "/gatewayresponse/DEFAULT_4XX/responseParameters/gatewayresponse.header.Access-Control-Allow-Methods",
+    "value": "'GET,OPTIONS'"
+  }
+]

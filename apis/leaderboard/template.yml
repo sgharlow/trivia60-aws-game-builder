@@ -1,0 +1,138 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Description: SAM template for Leaderboard API
+
+Parameters:
+  Stage:
+    Type: String
+    Default: prod
+    AllowedValues:
+      - prod
+      - dev
+      - uat
+  PGHost:
+    Type: String
+    Description: PostgreSQL host
+  PGUser:
+    Type: String
+    Description: PostgreSQL user
+  PGPassword:
+    Type: String
+    NoEcho: true
+    Description: PostgreSQL password
+  PGDatabase:
+    Type: String
+    Description: PostgreSQL database name
+  PGPort:
+    Type: String
+    Default: "5432"
+    Description: PostgreSQL port
+
+Globals:
+  Function:
+    Runtime: nodejs18.x
+    MemorySize: 256
+    Timeout: 30
+    Environment:
+      Variables:
+        POSTGRES_HOST: !Ref PGHost
+        POSTGRES_USER: !Ref PGUser
+        POSTGRES_PASSWORD: !Ref PGPassword
+        POSTGRES_NAME: !Ref PGDatabase
+        POSTGRES_PORT: !Ref PGPort
+        ALLOWED_ORIGINS: http://localhost:3000,https://trivia60.com
+        NODE_ENV: !Ref Stage
+
+Resources:
+  LeaderboardFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+      Policies:
+        - PolicyName: LambdaPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:CreateNetworkInterface
+                  - ec2:DescribeNetworkInterfaces
+                  - ec2:DeleteNetworkInterface
+                  - ec2:AssignPrivateIpAddresses
+                  - ec2:UnassignPrivateIpAddresses
+                Resource: "*"
+
+  LeaderboardFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: index.handler
+      Role: !GetAtt LeaderboardFunctionRole.Arn
+      Events:
+        GetLeaderboard:
+          Type: Api
+          Properties:
+            RestApiId: !Ref LeaderboardApi
+            Path: /api/leaderboard
+            Method: GET
+        SetLeaderboard:
+          Type: Api
+          Properties:
+            RestApiId: !Ref LeaderboardApi
+            Path: /api/leaderboard
+            Method: POST
+        OptionsLeaderboard:
+          Type: Api
+          Properties:
+            RestApiId: !Ref LeaderboardApi
+            Path: /api/leaderboard
+            Method: OPTIONS
+        HealthCheck:
+          Type: Api
+          Properties:
+            RestApiId: !Ref LeaderboardApi
+            Path: /api/health
+            Method: GET
+        OptionsHealth:
+          Type: Api
+          Properties:
+            RestApiId: !Ref LeaderboardApi
+            Path: /api/health
+            Method: OPTIONS
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-02b1ab5edee65b0ae
+        SubnetIds:
+          - subnet-0c4f0b3a1bfcdfee0
+          - subnet-02347ccaf5502d590
+
+  LeaderboardApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Stage
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Api-Key,Accept,Origin,Authorization'"
+        AllowOrigin: "'https://trivia60.com,https://www.trivia60.com,http://localhost:3000'"
+        AllowCredentials: true
+        MaxAge: "'3600'"
+      Auth:
+        ApiKeyRequired: true
+        UsagePlan:
+          CreateUsagePlan: PER_API
+          Description: Usage plan for the Leaderboard API
+          Quota:
+            Limit: 5000
+            Period: MONTH
+          Throttle:
+            BurstLimit: 100
+            RateLimit: 50

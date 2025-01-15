@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60 Second Trivia Challenge</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <div id="app">
+        <!-- Splash Screen -->
+        <div id="splash-screen" class="game-screen">
+            <div class="content-overlay">
+                <button id="start-btn" class="primary-button">Play Now</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="game-screen hidden">
+            <div class="game-content">
+                <div class="stats-container">
+                    <div class="game-stats">
+                        <div id="score"><span id="current-score"></span></div>
+                        <h1 class="game-title">60 Second Trivia</h1>
+                        <div id="timer"><span id="time-remaining"></span></div>
+                    </div>
+                </div>
+
+                <div class="question-section">
+                    <div id="question-text"></div>
+                </div>
+
+                <div id="answers-container">
+                    <button class="answer-btn">A) A photo of a man eating a picture of actor Jason Segel every day until Jason Segel eats a picture of him</button>
+                    <button class="answer-btn">B) A video of a man who paid a $137 traffic ticket with 13,700 pennies</button>
+                    <button class="answer-btn">C) A photo of a man who sent a potato in the mail without any packaging, just stamps and an address written on it</button>
+                    <button class="answer-btn">D) A screenshot of a man who changed his LinkedIn job title to "Owner" after buying one share of Tesla stock</button>
+                </div>
+
+                <div class="hint-container">
+                    <div id="hint-display">
+                        <p id="hint-text" class="hidden"></p>
+                        <img id="hint-image" alt="Hint image" class="hidden">
+                    </div>
+                    <div class="hint-section">
+                        <div class="hint-group">
+                            <button id="text-hint-btn" class="hint-btn">Text Hint</button>
+                            <div class="hint-cost">-25 points</div>
+                        </div>
+                        <div class="hint-group">
+                            <button id="image-hint-btn" class="hint-btn">Image Hint</button>
+                            <div class="hint-cost">-50 points</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end-screen" class="game-screen hidden">
+            <div class="content-overlay">
+                <div class="end-content">
+                    <h2>Game Over!</h2>
+                    <div class="final-score">Score: <span id="final-score-value">0</span></div>
+                    
+                    <div class="leaderboard-section">
+                        <h3>Today's Top Players</h3>
+                        <div class="leaderboard-table">
+                            <table id="leaderboard">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Player</th>
+                                        <th>Score</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaderboard-body">
+                                    <!-- Leaderboard entries will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <button id="play-again-btn" class="primary-button">Play Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/env.js"></script>
+    <script type="module" src="js/logger-service.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

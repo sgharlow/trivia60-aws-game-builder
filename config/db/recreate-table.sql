@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS leaderboard;
+CREATE TABLE leaderboard (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    score INTEGER NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

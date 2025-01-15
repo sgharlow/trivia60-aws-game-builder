@@ -1,0 +1,10 @@
+{
+  "Access-Control-Allow-Origin": ["http://localhost:3000", "http://localhost:5000","https://your-own-s3-bucket.s3.us-east-1.amazonaws.com","https://trivia60.com", "https://www.trivia60.com"],
+  "Access-Control-Allow-Methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  "Access-Control-Allow-Headers": ["Content-Type","X-Api-Key","Authorization"],
+  "Access-Control-Expose-Headers": [],
+  "Access-Control-Allow-Credentials": true,
+  "Access-Control-Max-Age": 86400,
+  "Access-Control-Allow-Preflight": false,
+  "Access-Control-Options-Status": 204
+}

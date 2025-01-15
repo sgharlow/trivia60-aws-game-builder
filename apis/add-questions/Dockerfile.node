@@ -1,0 +1,22 @@
+FROM node:18
+
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY package*.json ./
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+# Expose port
+EXPOSE 3000
+
+# Set default environment variable
+ENV NODE_ENV=production
+
+# Start the application
+CMD [ "node", "index.js" ]

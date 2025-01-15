@@ -1,0 +1,10 @@
+{
+    "responseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Api-Key,Accept'",
+        "method.response.header.Access-Control-Allow-Methods": "'GET,POST,OPTIONS'",
+        "method.response.header.Access-Control-Allow-Origin": "'https://trivia60.com'"
+    },
+    "responseTemplates": {
+        "application/json": "{\"statusCode\": 200}"
+    }
+}

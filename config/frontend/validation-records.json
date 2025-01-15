@@ -1,0 +1,17 @@
+{
+    "Changes": [
+        {
+            "Action": "CREATE",
+            "ResourceRecordSet": {
+                "Name": "_5e0046065756e6452bc0c62835434c67.trivia60.com",
+                "Type": "CNAME",
+                "TTL": 300,
+                "ResourceRecords": [
+                    {
+                        "Value": "_28d56ae0150c8ce0e7b8770ea12923e8.zfyfvmchrl.acm-validations.aws"
+                    }
+                ]
+            }
+        }
+    ]
+}

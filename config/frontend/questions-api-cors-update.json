@@ -1,0 +1,14 @@
+{
+    "patchOperations": [
+        {
+            "op": "replace",
+            "path": "/~1api/~1questions/OPTIONS/responses/200/responseParameters/method.response.header.Access-Control-Allow-Origin",
+            "value": "'https://trivia60.com'"
+        },
+        {
+            "op": "replace",
+            "path": "/~1api/~1questions/GET/responses/200/responseParameters/method.response.header.Access-Control-Allow-Origin",
+            "value": "'https://trivia60.com'"
+        }
+    ]
+}

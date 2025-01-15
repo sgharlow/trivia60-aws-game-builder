@@ -1,0 +1,85 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  LeaderboardFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-aqvyil8hjgzt/3cf1bdeaa6b7f0264ca83ca751ab8adb
+      Handler: index.handler
+      Runtime: nodejs18.x
+      Timeout: 30
+      MemorySize: 256
+      Environment:
+        Variables:
+          PGHOST:
+            Ref: PGHost
+          PGUSER:
+            Ref: PGUser
+          PGPASSWORD:
+            Ref: PGPassword
+          PGDATABASE:
+            Ref: PGDatabase
+          PGPORT:
+            Ref: PGPort
+      Events:
+        GetLeaderboard:
+          Type: Api
+          Properties:
+            Path: /leaderboard
+            Method: get
+            RestApiId:
+              Ref: LeaderboardApi
+        SetLeaderboard:
+          Type: Api
+          Properties:
+            Path: /set_leaderboard
+            Method: post
+            RestApiId:
+              Ref: LeaderboardApi
+        OptionsLeaderboard:
+          Type: Api
+          Properties:
+            Path: /leaderboard
+            Method: options
+            RestApiId:
+              Ref: LeaderboardApi
+        OptionsSetLeaderboard:
+          Type: Api
+          Properties:
+            Path: /set_leaderboard
+            Method: options
+            RestApiId:
+              Ref: LeaderboardApi
+    Metadata:
+      SamResourceId: LeaderboardFunction
+  LeaderboardApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: '''GET,POST,PUT,DELETE,OPTIONS'''
+        AllowHeaders: '''Content-Type,X-Api-Key,Authorization,Accept'''
+        AllowOrigin: '''http://localhost:3000,http://localhost:8080,https://your-own-s3-bucket.s3.us-east-1.amazonaws.com/frontend/index.html'''
+        AllowCredentials: true
+        MaxAge: '''3600'''
+        ExposeHeaders: ''''''
+    Metadata:
+      SamResourceId: LeaderboardApi
+Parameters:
+  PGHost:
+    Type: String
+    Description: PostgreSQL host
+  PGUser:
+    Type: String
+    Description: PostgreSQL user
+  PGPassword:
+    Type: String
+    NoEcho: true
+    Description: PostgreSQL password
+  PGDatabase:
+    Type: String
+    Description: PostgreSQL database name
+  PGPort:
+    Type: String
+    Default: '5432'
+    Description: PostgreSQL port

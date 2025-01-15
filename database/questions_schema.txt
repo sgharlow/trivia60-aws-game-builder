@@ -1,0 +1,11 @@
+{
+    id: number,
+    question: string,
+    options: string[4],
+    correct_answer: number (0-3),
+    explanation: string,
+    text_hint: string,
+    image_hint: string | null,
+    category: string,
+    difficulty: 'Easy' | 'Medium' | 'Hard'
+}

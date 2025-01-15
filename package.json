@@ -1,0 +1,15 @@
+{
+  "name": "trivia-leaderboard",
+  "version": "1.0.0",
+  "description": "Leaderboard function for Trivia60",
+  "main": "leaderboard-function.js",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.726.1",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "openai": "^4.78.1",
+    "pg": "^8.13.1"
+  }
+}

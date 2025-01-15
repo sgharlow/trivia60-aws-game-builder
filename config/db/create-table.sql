@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS leaderboard (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    score INTEGER NOT NULL,
+    timestamp TIMESTAMP NOT NULL
+);

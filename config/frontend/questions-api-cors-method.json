@@ -1,0 +1,7 @@
+{
+  "responseParameters": {
+    "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Api-Key,Accept'",
+    "method.response.header.Access-Control-Allow-Methods": "'GET,OPTIONS'",
+    "method.response.header.Access-Control-Allow-Origin": "'https://trivia60.com,https://www.trivia60.com,http://localhost:3000'"
+  }
+}

@@ -1,0 +1,21 @@
+# Source code
+src/
+test/
+tests/
+
+# Config files
+.eslintrc
+.prettierrc
+tsconfig.json
+jest.config.js
+
+# Git files
+.git/
+.gitignore
+
+# Build artifacts
+.aws-sam/
+*.zip
+
+# Development files
+README.md

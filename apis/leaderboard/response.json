@@ -1,0 +1,1 @@
+{"errorType":"Runtime.HandlerNotFound","errorMessage":"index.handler is undefined or not exported","trace":["Runtime.HandlerNotFound: index.handler is undefined or not exported","    at UserFunction.js.module.exports.load (file:///var/runtime/index.mjs:1122:15)","    at async start (file:///var/runtime/index.mjs:1282:23)","    at async file:///var/runtime/index.mjs:1288:1"]}
